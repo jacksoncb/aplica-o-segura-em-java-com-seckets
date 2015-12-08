@@ -31,8 +31,7 @@ public class UDPServer {
 			
 			serverSocket.receive(receivePacket);
 			
-			//String sentence = new String(receivePacket.getData());
-			
+			//sentence - Recebe a mensagem descriptografada 
 			String sentence = CriptografiaUDP.decrypt(receiveData);
 			
 			System.out.println("Recebido: " + sentence);
@@ -44,12 +43,13 @@ public class UDPServer {
 			
 			String capitalizedSentence = sentence.toUpperCase();
 			
-			//String capitalizedSentence = CriptografiaUDP.decrypt(sentence.getBytes());
-			
+			//sendData - Recebe a mensagem criptografada
 			sendData = CriptografiaUDP.encrypt(capitalizedSentence);			
 			
+			//Cria pacote udp
 			DatagramPacket sendPacket = new DatagramPacket(sendData,sendData.length, IPAddress, port);
 			
+			//Envia para o cliente
 			serverSocket.send(sendPacket);
 			
 			for(int i =0; i < receiveData.length; i++)
