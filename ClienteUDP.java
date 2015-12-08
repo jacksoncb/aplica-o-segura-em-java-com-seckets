@@ -33,7 +33,7 @@ public class UDPClient {
 			//Lê entrada do usuário
 			String sentence = inFromUser.readLine();
 			
-			//sendData = sentence.getBytes();
+			//sendData - recebe a String criptografada em bytes			
 			sendData = CriptografiaUDP.encrypt(sentence);
 			
 			//Cria pacote udp
@@ -47,8 +47,7 @@ public class UDPClient {
 			
 			clientSocket.receive(receivePacket);
 			
-//			String modifiedSentence = new String(receivePacket.getData());
-			
+			//modifiedSentence - Recebe a mensagem do Servidor descriptografada
 			String modifiedSentence = CriptografiaUDP.decrypt(receiveData);
 			
 			System.out.println("Recebido do servidor UDP:" + modifiedSentence);
